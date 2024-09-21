@@ -1,0 +1,60 @@
+<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Add New product
+    </a>
+   
+</p>
+
+<!-- Without using FormBuilder -->
+<!-- <div class="collapse" id="collapseExample" style="border: 1px solid white;margin: 10px;padding: 10px;border-radius: 10px;">
+   <form (ngSubmit)="onClickAddNewProduct()"> 
+      <div class="card card-body">
+         <div>
+            <label for="">Name</label>
+            <input name=name type="text" class="form-control" [(ngModel)]="newProduct.name">
+         </div>
+         <div>
+            <label for="">Description</label>
+            <input name=description type="text" class="form-control"[(ngModel)]="newProduct.description">
+         </div>
+         <div>
+            <label for="">Price</label>
+            <input name=price type="text" class="form-control" [(ngModel)]="newProduct.price">
+         </div>
+         <div>
+            <label for="">count</label>
+            <input name=count type="text" class="form-control" [(ngModel)]="newProduct.counts">
+         </div>
+         {{newProduct | json}} Comment this line
+         <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Submit</button>
+    </div>
+   </form>
+</div> -->
+
+<!-- Using FormBuilder -->
+<div class="collapse" id="collapseExample" style="border: 1px solid white;margin: 10px;padding: 10px;border-radius: 10px;">
+   <form [formGroup]="form" (ngSubmit)="onClickSumbitForm()"> 
+      <div class="card card-body">
+         <div>
+            <label for="">Name</label>
+            <input formControlName="productName" name=name type="text" class="form-control">
+            <div *ngIf="(!form.controls.productName.valid && form.controls.productName.dirty) || showNameError">
+               <label style="color: red;" for="">{{msgError}}</label>
+            </div>
+         </div>
+         <div>
+            <label for="">Description</label>
+            <input formControlName="description" name=description type="text" class="form-control">
+         </div>
+         <div>
+            <label for="">Price</label>
+            <input formControlName="price" name=price type="number" class="form-control" >
+         </div>
+         <div>
+            <label for="">count</label>
+            <input formControlName="counts" name=count type="number" class="form-control" >
+         </div>
+         <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Submit</button>
+    </div>
+   </form>
+</div>

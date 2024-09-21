@@ -1,0 +1,41 @@
+<div class="container" style=" margin-top: 20px;">
+    
+
+    <!-- <input placeholder="Search..." [(ngModel)]="search" class="form-control" type="text" id="" style="border: 1px solid black;"> -->
+    
+    <app-add-product></app-add-product>
+
+<div class="cards">
+    <div *ngIf = "checkProducts()">
+        <h1 style="text-align: center;">No product available</h1>
+    </div>
+    <!-- <div *ngIf="products.length===0">
+        <h1>No product</h1>
+    </div> -->
+    <!-- <div class="card" *ngFor="let product of products| custom"  [ngStyle] = "styles"> -->
+    <div class="card" *ngFor="let product of allProducts"  [ngStyle] = "styles" (click)="onClickProduct(product['id'])">
+        <img src="../../assets/images/samsung.jpg" class="card-img-top" [alt]="product.name" style="height: 200px; width: 200px; margin: auto; object-fit: contain;">
+        <div class="card-body">
+            <h5 class="card-title">{{product['name'] | titlecase}}</h5>
+            <p class="card-text">{{product['description']}}</p>
+            <p [ngClass]="{costly : product.price >= 99999}"><strong>{{product.price | currency:'INR'}}</strong></p>
+            <p><span>Count : {{product['counts']}}</span></p>
+            <a href="#" class="btn btn-primary" (click)="onclickCart()">Add to cart</a>
+            <button (click)="onDeleteProduct(product.id)" style="margin-left: 10px;" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</div>
+
+<style>
+
+.cards {
+    display: grid;
+    grid-template-columns: 
+    repeat(auto-fit, minmax(33%, 1fr));
+    gap:5px;
+}
+
+.costly {
+    color: red;
+}
+</style>
